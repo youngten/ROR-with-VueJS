@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
+    render plain: 'sfasdf'
   end
 
   def help
