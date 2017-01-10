@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
+
   def home
-    render plain: 'sfasdf'
   end
 
   def help
@@ -8,4 +8,8 @@ class StaticPagesController < ApplicationController
 
   def about
   end
+
+  def contact
+  end
+  
 end
