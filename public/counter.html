@@ -15,17 +15,7 @@
   <div class="row">
     <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-12">
       <a class="btn btn-lg btn-success" v-on:click="counter1 += 1">增加 1</a>
-      <span style="font-size:50px;">这个按钮被点击了 {{ new Intl.NumberFormat().format(counter1) }} 次。</span>
-      <br>
-      <br>
-      <a class="btn btn-lg btn-warning" v-on:click="counter2 += 88456">增加萬</a>
-      <span style="font-size:50px;">这个按钮被点击了 {{ new Intl.NumberFormat().format(counter2) }} 次。</span>
-      <br>
-      <br>
-      <a class="btn btn-lg btn-primary" v-on:click="counter3 += 123133789">增加億</a>
-      <span style="font-size:50px;">这个按钮被点击了 {{ new Intl.NumberFormat().format(counter3) }} 次。</span>
-      <br>
-      <br>
+      <span style="font-size:50px;"> {{ counter1 }} </span>
     </div>
   </div>
 </div>
