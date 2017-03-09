@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.1/vue.min.js"></script>
+  <title>無限點擊 Click Click ...</title>
+</head>
+<body>
+
+<br>
+<br>
+<div class="container" id="example-1">
+  <div class="row">
+    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-12">
+      <a id="id1" class="btn btn-lg btn-default" v-on:click="counter1 += rnd1 = Math.floor(Math.random()*111)">       {{ rnd1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</a><strong style="font-size:30px;">　　{{ counter1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</strong><br><br>
+      <a id="id2" class="btn btn-lg btn-success" v-on:click="counter2 += rnd2 = Math.floor(Math.random()*1111)">      {{ rnd2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</a><strong style="font-size:30px;">　　{{ counter2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</strong><br><br>
+      <a id="id3" class="btn btn-lg btn-warning" v-on:click="counter3 += rnd3 = Math.floor(Math.random()*11111)">     {{ rnd3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</a><strong style="font-size:30px;">　　{{ counter3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</strong><br><br>
+      <a id="id4" class="btn btn-lg btn-danger"  v-on:click="counter4 += rnd4 = Math.floor(Math.random()*111111)">    {{ rnd4.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</a><strong style="font-size:30px;">　　{{ counter4.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</strong><br><br>
+      <a id="id5" class="btn btn-lg btn-info"    v-on:click="counter5 += rnd5 = Math.floor(Math.random()*1111111)">   {{ rnd5.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</a><strong style="font-size:30px;">　　{{ counter5.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</strong><br><br>
+      <a id="id6" class="btn btn-lg btn-primary" v-on:click="counter6 += rnd6 = Math.floor(Math.random()*11111111)">  {{ rnd6.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</a><strong style="font-size:30px;">　　{{ counter6.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</strong><br><br>
+    </div>
+  </div>
+</div>
+ 
+    <script>
+
+//Vue.config.devtools = false;
+//Vue.config.silent = true;
+//Vue.config.debug = false;
+
+    var example1 = new Vue({
+      el: '#example-1',
+      data: {
+        rnd1: 0,
+        rnd2: 0,
+        rnd3: 0,
+        rnd4: 0,
+        rnd5: 0,
+        rnd6: 0,
+        counter1: 0,
+        counter2: 0,
+        counter3: 0,
+        counter4: 0,
+        counter5: 0,
+        counter6: 0
+      },
+      methods: {
+        fetchHole: function () { 
+          document.querySelector("#id1").click();
+          document.querySelector("#id2").click();
+          document.querySelector("#id3").click();
+          document.querySelector("#id4").click();
+          document.querySelector("#id5").click();
+          document.querySelector("#id6").click();
+        }
+      }
+    })
+  
+  var sit = setInterval(example1.fetchHole, 1000);
+  
+  </script>
+
+  
+  </body>
+</html>
+
+
