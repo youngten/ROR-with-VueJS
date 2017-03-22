@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.4/vue.js"></script>
+  <title>vue6</title>
+</head>
+<body>
+
+
+<div id="app-7">
+  <ol>
+    <!-- 现在我们为每个todo-item提供待办项对象    -->
+    <!-- 待办项对象是变量，即其内容可以是动态的 -->
+    <todo-item v-for="item in groceryList" :key="item.id" v-bind:todo="item">broken</todo-item>
+  </ol>
+  <span>Message: {{ msg | capitalize }}</span>
+  <br>
+  <span v-once>This will never change: {{ msg }}</span>
+  <br>
+  <input v-model='msg'>
+  <br>
+  <span>{{ rtn_msg }}</span>
+  <br>
+  <button v-bind:disabled='true'>Button</button>
+  <div class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }">
+  <h1 v-if="ok">Yes</h1>
+<h1 v-else>No</h1>
+<div v-if="Math.random() > 0.5">
+  Now you see me
+</div>
+<div v-else>
+  Now you don't
+</div>
+  </div>
+</div>
+
+
+<script>
+
+
+    Vue.component('todo-item', {
+        props: ['todo'],
+        template: '<li>{{ todo.text }}</li>'
+    });
+    var app7 = new Vue({
+        el: '#app-7',
+        data: {
+            ok: true,
+            isActive: true,
+            hasError: true,
+            msg: 'test',
+            groceryList: [
+                { text: 'Vegetables' },
+                { text: 'Cheese' },
+                { text: 'Cheese' },
+                { text: 'Cheese' },
+                { text: 'Whatever else humans are supposed to eat' },
+                { text: 'Whatever else humans are supposed to eat' },
+                { text: 'Whatever else humans are supposed to eat' },
+            ]
+        },
+        computed: {
+            rtn_msg: function(){
+                return this.msg
+            }
+        },
+        filters: {
+            capitalize: function (value) {
+                if (!value) return '';
+                value = value.toString();
+                //return value.charAt(0).toUpperCase() + value.slice(1)
+                return value.slice(0) + value[value.length - 1].toUpperCase()
+            }
+        },
+        beforeCreate: function () {
+            console.log('beforeCreate')
+        },
+        created: function () {
+            console.log('created')
+        },
+        beforeMount: function () {
+            console.log('beforeMount')
+        },
+        mounted: function () {
+            console.log('mounted')
+        },
+        beforeUpdate: function () {
+            console.log('beforeUpdate')
+        },
+        updated: function () {
+            console.log('updated')
+        },
+        beforeDestroy: function () {
+            console.log('beforeDestroy')
+        },
+        destroyed: function () {
+            console.log('destroyed')
+        },
+    });
+
+
+</script>
+
+
+</body>
+</html>
+
+
