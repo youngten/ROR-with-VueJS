@@ -10,6 +10,12 @@
 </head>
 <body>
 
+<div id="example-1">
+  {{list_arr}}
+  <br>
+  <button id="id1" v-on:click="counter += get_rnd()">增加 {{rnd}}</button>
+  <p>这个按钮被点击了 {{ counter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} 次。</p>
+</div>
 
 <div id="app-7">
   <ol>
@@ -69,34 +75,119 @@
   <input v-on:keyup.enter="warn('按了Enter', $event)" placeholder='press enter'>
   <input @keyup.alt.67="warn('Alt + C')" placeholder='press alt+c'>
   <p @click.ctrl="warn('ctrl + click', $event)">click + ctrl</p>
+
+  <span>Multiline message is:</span>
+  <p style="white-space: pre">{{ message2 }}</p>
+  <br>
+  <textarea v-model="message2" placeholder="add multiple lines"></textarea>
+  <br>
+
+  <input type="checkbox" id="checkbox" v-model="checked">
+  <label for="checkbox">{{ checked }}</label>
+  <br>
+
+  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+  <label for="jack">Jack</label>
+  <input type="checkbox" id="john" value="John" v-model="checkedNames">
+  <label for="john">John</label>
+  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+  <label for="mike">Mike</label> | Checked names: {{ checkedNames }}
+  <br>
+  <div id="example-4" class="demo">
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label> | Picked: {{ picked }}
+  </div>
+
+  <div id="example-5" class="demo">
+    <select v-model="selected">
+      <option></option>
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+    <span>Selected: {{ selected }}</span>
+  </div>
+  <div id="example-6" class="demo">
+    <select v-model="selected2" multiple style="width: 50px">
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+    <br>
+    <span>Selected: {{ selected2 }}</span>
+  </div>
+
+  <select v-model="selected3">
+    <option v-for="option in options" v-bind:value="option.value">
+      {{ option.text }}
+    </option>
+  </select>
+  <span>Selected: {{ selected3 }}</span>
+
 </div>
 
 
 <script>
+    'use strict'
 
-'use strict'
-var e2 = new Vue({
-  el: '#e2',
-  data: {
-    name: 'Vue.js'
-  },
-  // 在 `methods` 对象中定义方法
-  methods: {
-    warn: function (message, event) {
-    // 现在我们可以访问原生事件对象
-    if (event)  alert(event.target.tagName) //event.preventDefault()
-    alert(message)
-    },
-    greet: function (event) {
-      // `this` 在方法里指当前 Vue 实例
-      alert('Hello ' + this.name + '!')
-      // `event` 是原生 DOM 事件
-      alert(event.target.tagName)
-    }
-  }
-})
-// 也可以用 JavaScript 直接调用方法
-//e2.greet() // -> 'Hello Vue.js!'
+    var example1 = new Vue({
+        el: '#example-1',
+        data: {
+            counter: 0,
+            rnd: 0,
+            arr: [],
+        },
+        methods: {
+            get_rnd: function () {
+                this.rnd = Math.floor(Math.random()*100 + 1);
+                return this.rnd;
+            }
+        },
+        computed: {
+            list_arr: function () {
+                this.arr.push(this.rnd);
+                return this.arr;
+            }
+        }
+
+    })
+
+    var e2 = new Vue({
+        el: '#e2',
+        data: {
+            name: 'Vue.js',
+            message2: '',
+            checked: true,
+            checkedNames: [],
+            picked: '',
+            selected: '',
+            selected2: [],
+            selected3: '',
+            options: [
+                { text: 'One', value: 'A' },
+                { text: 'Two', value: 'B' },
+                { text: 'Three', value: 'C' }
+            ],
+        },
+        // 在 `methods` 对象中定义方法
+        methods: {
+            warn: function (message, event) {
+                // 现在我们可以访问原生事件对象
+                if (event)  alert(event.target.tagName) //event.preventDefault()
+                alert(message)
+            },
+            greet: function (event) {
+                // `this` 在方法里指当前 Vue 实例
+                alert('Hello ' + this.name + '!')
+                // `event` 是原生 DOM 事件
+                alert(event.target.tagName)
+            }
+        }
+    })
+    // 也可以用 JavaScript 直接调用方法
+    //e2.greet() // -> 'Hello Vue.js!'
 
     new Vue({
         el: '#repeat-object',

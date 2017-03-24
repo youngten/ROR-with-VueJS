@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.4/vue.js"></script>
+  <title>vue7 - component</title>
+</head>
+<body>
+
+<div id="example">
+  <my-component></my-component>
+  <my-component2></my-component2>
+  <child2 message="hello!"></child2>
+  <child3 message="hello3!"></child3>
+</div>
+<div id="demo-2" class="demo">
+  <input v-model="parentMsg">
+  <br>
+  <child v-bind:my-message="parentMsg"></child>
+</div>
+<div id="counter-event-example">
+  <p>{{ total }}</p>
+  <button-counter v-on:increment="incrementTotal"></button-counter>
+  <button-counter v-on:increment="incrementTotal"></button-counter>
+</div>
+<script>
+    'use strict'
+
+Vue.component('button-counter', {
+  template: '<button v-on:click="increment">{{ counter }}</button>',
+  data: function () {
+    return {
+      counter: 0
+    }
+  },
+  methods: {
+    increment: function () {
+      this.counter += 1
+      this.$emit('increment')
+    }
+  },
+})
+new Vue({
+  el: '#counter-event-example',
+  data: {
+    total: 0
+  },
+  methods: {
+    incrementTotal: function () {
+      this.total += 1
+    }
+  }
+})
+
+    new Vue({
+        el: '#demo-2',
+        data: {
+            parentMsg: 'Message from parent'
+        },
+        components: {
+            child: {
+                props: ['myMessage'],
+                template: '<span>{{myMessage}}</span>'
+            }
+        }
+    });
+
+    var Child = {
+        template: '<div>A XXX custom component!</div>'
+    };
+
+    var Child3 = {
+        props: ['message'],
+        template: '<div>{{ message }}</div>'
+    };
+
+    // 注册
+    Vue.component('child2', {
+        // 声明 props
+        props: ['message'],
+        // 就像 data 一样，prop 可以用在模板内
+        // 同样也可以在 vm 实例中像 “this.message” 这样使用
+        template: '<div>{{ message }}</div>'
+    });
+
+    Vue.component('my-component2', {
+        template: '<div>A custom component2!</div>'
+    });
+
+    // 创建根实例
+
+    new Vue({
+        el: '#example',
+        components: {
+            // <my-component> 将只在父模板可用
+            'my-component': Child,
+            'Child3': Child3
+        }
+    });
+
+
+</script>
+
+
+</body>
+</html>
+
+
