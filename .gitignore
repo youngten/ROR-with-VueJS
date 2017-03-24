@@ -23,3 +23,6 @@
 /.idea
 
 config/initializers/pry.rb
+
+app/views/users/for_beautify.erb
+
