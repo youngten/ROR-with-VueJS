@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+  .fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-active {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active {
+  animation: bounce-out .5s;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bounce-out {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+.list-complete-item {
+  transition: all 1s;
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-complete-enter, .list-complete-leave-active {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.list-complete-leave-active {
+  position: absolute;
+}
+
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.4/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+  <title>vue8 - 过渡效果</title>
+</head>
+<body>
+
+
+<div id="list-complete-demo" class="demo">
+  <button v-on:click="shuffle">Shuffle</button>
+  <button id='id1' v-on:click="add">Add</button>
+  <button v-on:click="remove">Remove</button>
+  <button v-on:click="auto_add">Auto</button>
+  <button v-on:click="clear_timeout">Stop</button>
+  <transition-group name="list-complete" tag="p">
+    <span
+      v-for="item in items"
+      v-bind:key="item"
+      class="list-complete-item"
+    >
+      {{ item }}
+    </span>
+  </transition-group>
+</div>
+
+<div id="example-2">
+  <button @click="show = !show">Toggle show</button>
+  <transition name="bounce">
+    <p v-if="show">Look at me!</p>
+  </transition>
+</div>
+
+<div id="example-1">
+  <button @click="show = !show">
+    Toggle render
+  </button>
+  <transition name="slide-fade">
+    <p v-if="show">hello</p>
+  </transition>
+</div>
+<div id="demo">
+  <button v-on:click="show = !show">
+    Toggle
+  </button>
+  <transition name="fade">
+    <p v-if="show">hello</p>
+  </transition>
+</div>
+
+
+
+<script>
+    'use strict'
+
+new Vue({
+  el: '#list-complete-demo',
+  data: {
+    //items: [1,2,3,4,5,6,7,8,9],
+    items: (function(){
+      var arr = [];
+      var i;
+      for(i=1;i<=100;i++){
+        arr.push(i);
+      }
+      return arr;
+    }()),
+    nextNum: 100,
+    timeout: null
+  },
+  methods: {
+    randomIndex: function () {
+      return Math.floor(Math.random() * this.items.length)
+    },
+    add: function () {
+      this.items.splice(this.randomIndex(), 0, ++this.nextNum)
+    },
+    auto_add: function () {
+      var c = document.querySelector("#id1");
+      var _this = this;
+      setTimeout(function repeatMe() {
+        c.click();
+        _this.timeout = setTimeout(repeatMe, 2500);          
+      }, 100);
+    },
+    clear_timeout: function () {
+      console.log(this.timeout);
+      clearTimeout(this.timeout);
+    },
+    remove: function () {
+      this.items.splice(this.randomIndex(), 1)
+    },
+    shuffle: function () {
+      this.items = _.shuffle(this.items)
+    }
+  }
+});
+
+new Vue({
+  el: '#example-2',
+  data: {
+    show: true
+  }
+})
+
+new Vue({
+  el: '#example-1',
+  data: {
+    show: true
+  }
+});
+
+new Vue({
+  el: '#demo',
+  data: {
+    show: true
+  }
+});
+
+
+
+</script>
+
+
+</body>
+</html>
+
+

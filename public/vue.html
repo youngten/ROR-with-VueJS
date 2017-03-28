@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.4/vue.js"></script>
+  <title>vue.html</title>
+</head>
+<body>
+
+  
+  
+<div id="example-1">
+{{list_arr}}
+<br>
+  <button id="id1" v-on:click="counter += get_rnd()">增加 {{rnd}}</button>
+  <p>这个按钮被点击了 {{ counter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} 次。</p>
+  
+    <input type="checkbox" id="checkbox" v-model="checked">
+<label for="checkbox">{{ checked }}</label>
+  
+</div>
+  
+
+  
+    <script>
+
+//Vue.config.devtools = false;
+//Vue.config.silent = true;
+//Vue.config.debug = false;
+
+    var example1 = new Vue({
+      el: '#example-1',
+      data: {
+        counter: 0,
+        rnd: 0,
+        arr: [],
+        checked: true,
+      },
+      methods: {
+        get_rnd: function () {
+          this.rnd = Math.floor(Math.random()*100 + 1);
+          return this.rnd;
+          }
+      },
+      computed: {
+        list_arr: function () {
+          this.arr.push(this.rnd);
+          return this.arr;
+          }
+      }
+      
+    })
+
+/*
+setTimeout(function repeatMe() {
+  document.querySelector("#id1").click();
+  setTimeout(repeatMe, 1000);          
+}, 1000);
+*/
+
+  </script>
+
+  
+  </body>
+</html>
+
+
