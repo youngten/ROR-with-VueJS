@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.1/vue.min.js"></script>
+  <title>無限點擊 Click Click ...</title>
+</head>
+<body>
+
+  
+<div class="container" id="example-1">
+  <div class="row">
+    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-12">
+      <a class="btn btn-lg btn-success" v-on:click="counter1 += 1">增加 1</a>
+      <span style="font-size:50px;">这个按钮被点击了 {{ new Intl.NumberFormat().format(counter1) }} 次。</span>
+      <br>
+      <br>
+      <a class="btn btn-lg btn-warning" v-on:click="counter2 += 88456">增加萬</a>
+      <span style="font-size:50px;">这个按钮被点击了 {{ new Intl.NumberFormat().format(counter2) }} 次。</span>
+      <br>
+      <br>
+      <a class="btn btn-lg btn-primary" v-on:click="counter3 += 123133789">增加億</a>
+      <span style="font-size:50px;">这个按钮被点击了 {{ new Intl.NumberFormat().format(counter3) }} 次。</span>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>
+ 
+    <script>
+
+//Vue.config.devtools = false;
+//Vue.config.silent = true;
+//Vue.config.debug = false;
+
+    var example1 = new Vue({
+      el: '#example-1',
+      data: {
+        counter1: 0,
+        counter2: 0,
+        counter3: 0
+      }
+    })
+  
+  
+  </script>
+
+  
+  </body>
+</html>
+
+

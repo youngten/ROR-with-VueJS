@@ -1,0 +1,72 @@
+   <!doctype html>
+    <html lang=en>
+    <head>
+    <meta charset=utf-8>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+      .container {
+        width: 40%;
+        margin: 20px auto 0px auto;
+      }
+      .removed {
+        color: lightgray;
+      }
+      .removed label {
+        text-decoration: line-through;
+      }
+      div#app ul li {
+        list-style-type: none;
+      }    
+    </style>
+    <script src="vue.js"></script>
+    <title>Vue3</title>
+    </head>
+    <body>
+
+<div id="app" class="container">
+
+
+  <button @click="addItem">Get Random Value</button>
+
+
+  <ol>
+    <!-- Now we provide each todo-item with the todo object    -->
+    <!-- it's representing, so that its content can be dynamic -->
+    <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+  </ol>
+
+  
+  
+</div>
+
+
+
+<script>
+
+Vue.component('todo-item', {
+  props: ['todo'],
+  template: '<li>{{ todo.text }}</li>'
+})
+
+var app7 = new Vue({
+  el: '#app',
+  data: {
+    groceryList: [
+      { text: 'Vegetables' },
+      { text: 'Cheese' },
+      { text: 'Whatever else humans are supposed to eat' }
+    ]
+  },
+  methods: {
+      addItem: function(){
+                  this.groceryList.push(
+                    {text: Math.floor(Math.random()*1000)}
+                    );
+           }
+         }
+});
+
+
+    </script>
+    </body>
+    </html>
