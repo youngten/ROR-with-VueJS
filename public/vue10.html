@@ -11,20 +11,39 @@
 
 <div id='app'>
 
-<xxx></xxx>
+  <xxx></xxx>
+  <xxx></xxx>
+  <xxx></xxx>
 
 </div>
 
+<div id="app2">
+  <button @click='setMessage(Math.random())'>setMessage</button>
+  <h1>{{ message }}</h1>
+  <textarea v-model="message" :class='{ "form-control": isActive }'></textarea>
+</div>
 
 <script>
     'use strict'
-Vue.component('xxx',{
-  template: '<h1>xxx</h1>'
-});
+    Vue.component('xxx',{
+        template: '<h6>xxx{{msg}}</h6>',
+        data: function(){ return {msg: 123}}
+    });
 
-new Vue({
-el: '#app',
-});
+    new Vue({
+        el: '#app',
+    });
+
+    new Vue({
+        el: '#app2',
+        data: {
+            message: 'test',
+            isActive: true,
+        },
+        methods: {
+        setMessage: function(msg){ return this.message += msg + '\n'}
+        }
+    });
 
 </script>
 
